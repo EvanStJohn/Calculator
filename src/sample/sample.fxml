@@ -72,7 +72,7 @@
                <font>
                   <Font size="24.0" />
                </font></Button>
-            <Button fx:id="zero" mnemonicParsing="false" prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: #000066;" text="0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Button fx:id="zero" mnemonicParsing="false" onAction="#clickZero" prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: #000066;" text="0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font size="24.0" />
                </font></Button>
@@ -126,7 +126,7 @@
       </GridPane>
    </right>
    <top>
-      <Label fx:id="result" alignment="CENTER" prefHeight="120.0" prefWidth="400.0" textAlignment="CENTER" BorderPane.alignment="CENTER">
+      <Label fx:id="output" alignment="CENTER" prefHeight="120.0" prefWidth="400.0" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>
             <Font size="24.0" />
          </font>
