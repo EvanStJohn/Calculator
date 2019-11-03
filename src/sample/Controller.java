@@ -35,6 +35,7 @@ public class Controller {
         {
             output.setText("");
             reset = false;
+            error = false;
         }
 
         output.setText(output.getText() + "1");
@@ -45,6 +46,7 @@ public class Controller {
         {
             output.setText("");
             reset = false;
+            error = false;
         }
 
         output.setText(output.getText() + "2");
@@ -55,6 +57,7 @@ public class Controller {
         {
             output.setText("");
             reset = false;
+            error = false;
         }
 
         output.setText(output.getText() + "3");
@@ -65,6 +68,7 @@ public class Controller {
         {
             output.setText("");
             reset = false;
+            error = false;
         }
 
         output.setText(output.getText() + "4");
@@ -75,6 +79,7 @@ public class Controller {
         {
             output.setText("");
             reset = false;
+            error = false;
         }
 
         output.setText(output.getText() + "5");
@@ -85,6 +90,7 @@ public class Controller {
         {
             output.setText("");
             reset = false;
+            error = false;
         }
 
         output.setText(output.getText() + "6");
@@ -95,6 +101,7 @@ public class Controller {
         {
             output.setText("");
             reset = false;
+            error = false;
         }
 
         output.setText(output.getText() + "7");
@@ -105,6 +112,7 @@ public class Controller {
         {
             output.setText("");
             reset = false;
+            error = false;
         }
 
         output.setText(output.getText() + "8");
@@ -115,6 +123,7 @@ public class Controller {
         {
             output.setText("");
             reset = false;
+            error = false;
         }
 
         output.setText(output.getText() + "9");
@@ -125,6 +134,7 @@ public class Controller {
         {
             output.setText("");
             reset = false;
+            error = false;
         }
 
         output.setText(output.getText() + "0");
@@ -141,6 +151,7 @@ public class Controller {
         {
             output.setText("");
             reset = false;
+            error = false;
         }
 
         output.setText(output.getText() + ".");
@@ -151,6 +162,7 @@ public class Controller {
         {
             output.setText("");
             reset = false;
+            error = false;
         }
 
         output.setText(output.getText() + "-");
@@ -161,6 +173,7 @@ public class Controller {
         {
             output.setText("");
             reset = false;
+            error = false;
         }
 
         output.setText(output.getText() + "( ");
@@ -171,6 +184,7 @@ public class Controller {
         {
             output.setText("");
             reset = false;
+            error = false;
         }
 
         output.setText(output.getText() + " )");
@@ -236,11 +250,6 @@ public class Controller {
         {
             output.setText(calculate(postfix()));
         }
-        catch (InputMismatchException e)
-        {
-            output.setText("Invalid Expression");
-            error = true;
-        }
         catch (ArithmeticException e)
         {
             output.setText("Indeterminate");
@@ -249,6 +258,11 @@ public class Controller {
         catch (EmptyStackException e)
         {
             output.setText("Invalid Expression");
+            error = true;
+        }
+        catch (NumberFormatException e)
+        {
+            output.setText("Incorrect Format");
             error = true;
         }
         catch (RuntimeException e)
@@ -279,6 +293,12 @@ public class Controller {
         ArrayList<String> postfix = new ArrayList<>();
         Stack<String> stack = new Stack<>();
 
+        if (token.length == 1)
+        {
+            postfix.add(token[0]);
+            return postfix;
+        }
+
         for (int i = 0; i < token.length; i++)
         {
             if (priority(token[i]) > 0)
@@ -290,17 +310,17 @@ public class Controller {
 
                 stack.push(token[i]);
             }
-            else if (token[i] == ")")
+            else if (token[i].equals(")"))
             {
                 String temp = stack.pop();
 
-                while (temp != "(")
+                while (!temp.equals("("))
                 {
                     postfix.add(temp);
                     temp = stack.pop();
                 }
             }
-            else if (token[i] == "(")
+            else if (token[i].equals("("))
             {
                 stack.push(token[i]);
             }
@@ -310,7 +330,7 @@ public class Controller {
             }
         }
 
-        for (int i = 0; i <= stack.size(); i++)
+        while (!stack.isEmpty())
         {
             postfix.add(stack.pop());
         }
@@ -322,6 +342,11 @@ public class Controller {
         double result = 0;
         double num;
         Stack<Double> stack = new Stack<Double>();
+
+        if (postfix.size() == 1)
+        {
+            return Double.toString(Double.parseDouble(postfix.get(0)));
+        }
 
         for (int i = 0; i < postfix.size(); i++)
         {
