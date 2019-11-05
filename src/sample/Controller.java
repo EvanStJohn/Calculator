@@ -205,9 +205,9 @@ public class Controller {
         if (error)
         {
             output.setText("");
-            reset = false;
             error = false;
         }
+        reset = false;
 
         output.setText(output.getText() + " / ");
     }
@@ -216,9 +216,9 @@ public class Controller {
         if (error)
         {
             output.setText("");
-            reset = false;
             error = false;
         }
+        reset = false;
 
         output.setText(output.getText() + " * ");
     }
@@ -227,9 +227,9 @@ public class Controller {
         if (error)
         {
             output.setText("");
-            reset = false;
             error = false;
         }
+        reset = false;
 
         output.setText(output.getText() + " - ");
     }
@@ -238,9 +238,9 @@ public class Controller {
         if (error)
         {
             output.setText("");
-            reset = false;
             error = false;
         }
+        reset = false;
 
         output.setText(output.getText() + " + ");
     }
