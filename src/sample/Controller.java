@@ -290,8 +290,39 @@ public class Controller {
 
     public ArrayList<String> postfix(){
         String[] token = output.getText().split(" ");
+
+        List<String> list = new ArrayList<>(Arrays.asList(token));
+        for (int i = 0; i < list.size(); i++)
+        {
+            if (list.get(i).equals("-"))
+            {
+                try
+                {
+                    if(i != 0 && !list.get(i - 1).equals(")"))
+                    {
+                        Double.parseDouble(list.get(i - 1));
+                    }
+                }
+                catch (RuntimeException e)
+                {
+                    list.remove(i);
+                    double num = Double.parseDouble(list.get(i));
+                    if(num < 0)
+                    {
+                        throw new NumberFormatException();
+                    }
+                    num -= num * 2;
+                    list.set(i, Double.toString(num));
+                    list.remove(i-1);
+                }
+            }
+        }
+        token = list.toArray(new String[list.size()]);
+
         ArrayList<String> postfix = new ArrayList<>();
         Stack<String> stack = new Stack<>();
+
+
 
         if (token.length == 1)
         {
